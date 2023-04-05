@@ -66,6 +66,11 @@ export default function Navbar() {
                 uploadDelete
               </Link>
             </li>
+            <li className="nav-item active">
+              <Link className="nav-link" to='/unsubscribe'>
+              UnSubscribeSnapshot
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

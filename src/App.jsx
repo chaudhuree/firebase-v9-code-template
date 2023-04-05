@@ -10,6 +10,7 @@ import DataUpdate from './pages/DataUpdate'
 import FileUpload from './pages/FileUpload'
 import FileUploadHook from './pages/FileUploadHook'
 import RegisterPage from './pages/RegisterPage'
+import  UnSubscribeSnapshot  from "./pages/UnSubscribeSnapshot"
 import UploadDelete from './pages/UploadDelete'
 import UploadFetch from './pages/UploadFetch'
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/uploadfetch" element={<UploadFetch/>} />
           <Route path="/uploaddelete" element={<UploadDelete/>} />
           <Route path="/query" element={<DataShowUsingQuery/>} />
+          <Route path="/unsubscribe" element={<UnSubscribeSnapshot/>} />
         </Routes>
       </Router>
     </div>
