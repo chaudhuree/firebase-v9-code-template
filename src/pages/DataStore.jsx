@@ -1,6 +1,7 @@
 import {
   addDoc,
-  collection
+  collection,
+  serverTimestamp
 } from "firebase/firestore";
 import { useState } from "react";
 import { auth, db } from "../config/firebase";
@@ -17,6 +18,7 @@ export default function DataStore() {
       const docRef = await addDoc(collectionRef, {
         title: movieTitle,
         userId: auth?.currentUser?.uid,
+        createdAt: serverTimestamp(),
       });
       setMovieTitle("");
       console.log("Document written with ID: ", docRef.id);

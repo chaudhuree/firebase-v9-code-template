@@ -1,3 +1,5 @@
+> ## orderBy er jonne DataShowUsingQuery.js file e dekhte hobe. comments kora ase instructions ti.
+
 ## firestore rules
 
 ```
@@ -80,4 +82,103 @@ const queryDocumentsWithLimit = async (limitNumber) => {
   });
   return documents;
 };
+
+// Query to combine multiple conditions
+const queryDocumentsWithMultipleConditions = async () => {
+  const documents = [];
+  const q = query(
+    collection(db, "collection_name"),
+    where("field1", "==", "value1"),
+    where("field2", "==", "value2"),
+    orderBy("field3"),
+    limit(10)
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // Do something with the data
+    documents.push({ id: doc.id, data: doc.data() });
+  });
+  return documents;
+};
+
+//Query to use array-contains
+const queryDocumentsWithArrayContains = async () => {
+  const documents = [];
+  const q = query(collection(db, "collection_name"), where("field", "array-contains", "value"));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // Do something with the data
+    documents.push({ id: doc.id, data: doc.data() });
+  });
+  return documents;
+};
+//here field is an array and value is an element of that array. like, field: religion, value: islam.
+
+//Query to use array-contains-any
+const queryDocumentsWithArrayContainsAny = async () => {
+  const documents = [];
+  const q = query(collection(db, "collection_name"), where("field", "array-contains-any", ["value1", "value2"]));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // Do something with the data
+    documents.push({ id: doc.id, data: doc.data() });
+  });
+  return documents;
+};
+
+//Query to use in
+const queryDocumentsWithIn = async () => {
+  const documents = [];
+  const q = query(collection(db, "collection_name"), where("field", "in", ["value1", "value2"]));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // Do something with the data
+    documents.push({ id: doc.id, data: doc.data() });
+  });
+  return documents;
+};
+// field is an array. value is an array of elements of that array. like, field: religion, value: [islam, christianity]
+
+//Query to use not-in
+const queryDocumentsWithNotIn = async () => {
+  const documents = [];
+  const q = query(collection(db, "collection_name"), where("field", "not-in", ["value1", "value2"]));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    // Do something with the data
+    documents.push({ id: doc.id, data: doc.data() });
+  });
+  return documents;
+};
+
+//Query to use OR
+const q = query(citiesRef,
+  or(where('capital', '==', true),
+     where('population', '>=', 1000000)
+  )
+);
+
+//Query to use AND
+const q = query(citiesRef,
+  and(where('capital', '==', true),
+      where('population', '>=', 1000000)
+  )
+);
+
+
+// combine and or
+const q = query(citiesRef,
+  or(and(where('capital', '==', true),
+         where('population', '>=', 1000000)),
+     where('country', '==', 'USA')
+  )
+);
+
+const q = query(collection(db, "cities"), and(
+  where('state', '==', 'CA'),
+  or(
+    where('capital', '==', true),
+    where('population', '>=', 1000000)
+  )
+));
 ```
