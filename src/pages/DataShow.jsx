@@ -1,6 +1,7 @@
 import {
   collection,
-  getDocs
+  getDocs,
+  onSnapshot
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../config/firebase";
@@ -11,7 +12,8 @@ export default function DataShow() {
   const collectionRef = collection(db, "movies");
 
   useEffect(() => {
-    getMovieList();
+    // getMovieList();
+    getSnapshot();
   }, []);
 
   const getMovieList = async () => {
@@ -27,6 +29,19 @@ export default function DataShow() {
       console.log(error);
     }
   };
+
+  // realtime data showing
+  const getSnapshot=()=>{
+    onSnapshot(collectionRef, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      console.log(data);
+      setMovieList(data);
+    });
+  }
+
 
   return (
     <div>
