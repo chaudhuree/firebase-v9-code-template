@@ -4,6 +4,7 @@ import './App.css'
 import Navbar from './components/nav/Navbar'
 import DataDelete from './pages/DataDelete'
 import DataShow from './pages/DataShow'
+import DataShowUsingQuery from './pages/DataShowUsingQuery'
 import DataStore from './pages/DataStore'
 import DataUpdate from './pages/DataUpdate'
 import FileUpload from './pages/FileUpload'
@@ -27,6 +28,7 @@ function App() {
           <Route path="/uploadhook" element={<FileUploadHook/>} />
           <Route path="/uploadfetch" element={<UploadFetch/>} />
           <Route path="/uploaddelete" element={<UploadDelete/>} />
+          <Route path="/query" element={<DataShowUsingQuery/>} />
         </Routes>
       </Router>
     </div>

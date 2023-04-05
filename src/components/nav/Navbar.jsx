@@ -27,6 +27,11 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item active">
+              <Link className="nav-link" to='/query'>
+                QueryView
+              </Link>
+            </li>
+            <li className="nav-item active">
               <Link className="nav-link" to='/add'>
                 add
               </Link>
